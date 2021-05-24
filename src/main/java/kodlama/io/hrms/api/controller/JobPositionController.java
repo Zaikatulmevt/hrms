@@ -10,8 +10,6 @@ import java.util.List;
 @RestController
 @RequestMapping("api/jobpositions")
 public class JobPositionController {
-    //@Autowired diyerek constructor oluşturmasak dahi çalışır fakat...
-    //her değişken için @Autowired yazmamız gerekir
     private JobPositionService jobPositionService;
 
     @Autowired
