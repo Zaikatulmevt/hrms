@@ -7,16 +7,21 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Data
-@Entity
-@NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "job_positions")
-public class JobPosition {
+@NoArgsConstructor
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "users")
+@Entity
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-    @Column(name = "job_position_name")
-    private String position;
+    @Column(name = "e_mail")
+    private String email;
+    @Column(name = "password")
+    private String password;
+    @Transient
+    private String password2;
 }
