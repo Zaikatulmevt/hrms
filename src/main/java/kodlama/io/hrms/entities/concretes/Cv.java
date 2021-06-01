@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -44,5 +45,15 @@ public class Cv {
     @Column(name = "is_active")
     private boolean isActive;
 
+
+
+    @OneToMany(mappedBy = "cv")
+    private List<Education> educations;
+    @OneToMany(mappedBy = "cv")
+    private List<ForeignLanguages> foreignLanguages;
+    @OneToMany(mappedBy = "cv")
+    private List<JobExperience> jobExperiences;
+    @OneToMany(mappedBy = "cv")
+    private List<TechnologiesAndProgrammingLanguage> technologiesAndProgrammingLanguages;
 
 }
