@@ -15,10 +15,15 @@ import java.util.List;
 
 @Service
 public class JobSeekerManager implements JobSeekerService {
-    @Autowired
+
     private JobSeekerDao jobSeekerDao;
+    private JobSeekerCheckService jobSeekerCheckService;
+
     @Autowired
-    private JobSeekerCheckService[] jobSeekerCheckServices;
+    public JobSeekerManager(JobSeekerDao jobSeekerDao, JobSeekerCheckService jobSeekerCheckService) {
+        this.jobSeekerDao = jobSeekerDao;
+        this.jobSeekerCheckService = jobSeekerCheckService;
+    }
 
     @Override
     public DataResult<List<JobSeeker>> getAll() {
@@ -27,10 +32,8 @@ public class JobSeekerManager implements JobSeekerService {
 
     @Override
     public Result add(JobSeeker jobSeeker) {
-        for (JobSeekerCheckService jobSeekerCheckService : jobSeekerCheckServices) {
-            if(jobSeekerCheckService.checkJobSeeker(jobSeeker).isSuccess() == false) {
-                return jobSeekerCheckService.checkJobSeeker(jobSeeker);
-            }
+        if (!this.jobSeekerCheckService.checkJobSeeker(jobSeeker).isSuccess()) {
+            return this.jobSeekerCheckService.checkJobSeeker(jobSeeker);
         }
         this.jobSeekerDao.save(jobSeeker);
         return new SuccessResult("Eklendi");
