@@ -4,11 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -26,6 +24,9 @@ public class JobSeeker extends User{
     private String nationalityId;
     @Column(name = "birthday_day")
     private LocalDate birthday;
+
+    @OneToMany(mappedBy = "jobSeeker")
+    private List<Cv> cvs;
 
 
 

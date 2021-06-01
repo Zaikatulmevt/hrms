@@ -1,5 +1,6 @@
 package kodlama.io.hrms.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "cvs")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "jobSeeker"})
 public class Cv {
 
     @Id
@@ -21,8 +23,8 @@ public class Cv {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "job_seeker_id")
-    private int jobSeekerId;
+//    @Column(name = "job_seeker_id")
+//    private int jobSeekerId;
 
     @Column(name = "photo")
     private String photo;
@@ -55,5 +57,8 @@ public class Cv {
     private List<JobExperience> jobExperiences;
     @OneToMany(mappedBy = "cv")
     private List<TechnologiesAndProgrammingLanguage> technologiesAndProgrammingLanguages;
+    @ManyToOne
+    @JoinColumn(name = "job_seeker_id")
+    private JobSeeker jobSeeker;
 
 }

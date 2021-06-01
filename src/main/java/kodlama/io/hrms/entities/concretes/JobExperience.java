@@ -28,8 +28,8 @@ public class JobExperience {
     @Column(name = "workplace_name")
     private String workPlaceName;
 
-    @Column(name = "job_position_id")
-    private int jobPositionId;
+//    @Column(name = "job_position_id")
+//    private int jobPositionId;
 
     @Column(name = "begin_date")
     private LocalDate beginDate;
@@ -43,4 +43,7 @@ public class JobExperience {
     @ManyToOne
     @JoinColumn(name = "cv_id")
     private Cv cv;
+    @ManyToOne
+    @JoinColumn(name = "job_position_id")
+    private JobPosition jobPosition;
 }
