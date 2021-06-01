@@ -24,4 +24,8 @@ public class JobPosition {
     @OneToMany(mappedBy = "jobPosition")
     @JsonIgnore
     private List<JobAdvertisement> jobAdvertisements;
+
+    @OneToMany(mappedBy = "jobPosition")
+    @JsonIgnore
+    private List<JobExperience> jobExperiences;
 }
