@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Data
 @AllArgsConstructor
@@ -17,11 +18,15 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @NotNull
     private int id;
     @Column(name = "e_mail")
+    @NotNull
     private String email;
     @Column(name = "password")
+    @NotNull
     private String password;
+    //Bu değiken persistance değil. Database'e aktarılmıyor.
     @Transient
     private String password2;
 }

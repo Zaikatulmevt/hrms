@@ -1,11 +1,10 @@
 package kodlama.io.hrms.api.controller;
 
-import kodlama.io.hrms.business.abstracts.EmployerService;
+import kodlama.io.hrms.business.abstracts.ForeignLanguageService;
 import kodlama.io.hrms.core.Utilities.Results.DataResult;
 import kodlama.io.hrms.core.Utilities.Results.ErrorDataResult;
 import kodlama.io.hrms.core.Utilities.Results.Result;
-import kodlama.io.hrms.entities.concretes.Employer;
-import kodlama.io.hrms.entities.concretes.JobSeeker;
+import kodlama.io.hrms.entities.concretes.ForeignLanguage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,20 +17,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@RequestMapping("/api/foreignlanguage")
 @RestController
-@RequestMapping("api/employer")
-public class EmployerController {
+public class ForeignLanguageController {
+
     @Autowired
-    private EmployerService employerService;
+    private ForeignLanguageService foreignLanguageService;
 
     @GetMapping("/getall")
-    public DataResult<List<Employer>> getAll() {
-        return this.employerService.getAll();
+    public DataResult<List<ForeignLanguage>> getAll(){
+        return this.foreignLanguageService.getAll();
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@Valid @RequestBody Employer employer) {
-        return ResponseEntity.ok(this.employerService.add(employer));
+    public ResponseEntity<?> Add(@Valid @RequestBody ForeignLanguage foreignLanguage){
+        return ResponseEntity.ok(this.foreignLanguageService.add(foreignLanguage));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -44,10 +44,4 @@ public class EmployerController {
         ErrorDataResult<Object> errors = new ErrorDataResult<Object>(validationErrors, "Validation Errors");
         return errors;
     }
-
-
-
-
-
-
 }

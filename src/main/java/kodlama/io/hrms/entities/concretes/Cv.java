@@ -4,10 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Data
@@ -15,16 +17,13 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "cvs")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "jobSeeker"})
 public class Cv {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @NotNull
     private int id;
-
-//    @Column(name = "job_seeker_id")
-//    private int jobSeekerId;
 
     @Column(name = "photo")
     private String photo;
@@ -39,12 +38,16 @@ public class Cv {
     private String description;
 
     @Column(name = "created_date")
+    @CreationTimestamp
+    @NotNull
     private LocalDate createdDate;
 
     @Column(name = "latest_update_date")
+    @UpdateTimestamp
     private LocalDate latestUpdateDate;
 
     @Column(name = "is_active")
+    @NotNull
     private boolean isActive;
 
 
@@ -52,7 +55,7 @@ public class Cv {
     @OneToMany(mappedBy = "cv")
     private List<Education> educations;
     @OneToMany(mappedBy = "cv")
-    private List<ForeignLanguages> foreignLanguages;
+    private List<ForeignLanguage> foreignLanguages;
     @OneToMany(mappedBy = "cv")
     private List<JobExperience> jobExperiences;
     @OneToMany(mappedBy = "cv")
