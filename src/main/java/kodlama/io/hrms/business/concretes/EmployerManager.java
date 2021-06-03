@@ -29,7 +29,7 @@ public class EmployerManager implements EmployerService {
 
     @Override
     public DataResult<List<Employer>> getAll() {
-        return new SuccessDataResult<List<Employer>>(this.employerDao.findAll(),"Başarılı" );
+        return new SuccessDataResult<List<Employer>>(this.employerDao.findAll(),"Successfully" );
     }
 
     @Override
@@ -38,6 +38,6 @@ public class EmployerManager implements EmployerService {
             return this.employerCheckService.checkEmployer(employer);
         }
         this.employerDao.save(employer);
-        return new SuccessResult("Eklendi");
+        return new SuccessResult("Added");
     }
 }
