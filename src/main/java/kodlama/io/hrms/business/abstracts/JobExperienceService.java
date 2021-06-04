@@ -11,4 +11,5 @@ public interface JobExperienceService {
 
     DataResult<List<JobExperience>> getAll();
     Result add(JobExperience jobExperience);
+    DataResult<List<JobExperience>> findAllByCvIdOrderByFinishDateDesc(int cvId);
 }

@@ -33,6 +33,11 @@ public class EducationController {
         return ResponseEntity.ok(this.educationService.add(education));
     }
 
+    @GetMapping("/findAllByCvIdOOrderByFinishDateDesc")
+    public DataResult<List<Education>> findAllByCvIdOOrderByFinishDateDesc(int cvId) {
+        return this.educationService.findAllByCvIdOOrderByFinishDateDesc(cvId);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorDataResult<Object> handleValidationException(MethodArgumentNotValidException exceptions) {

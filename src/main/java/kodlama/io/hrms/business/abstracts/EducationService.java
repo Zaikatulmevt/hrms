@@ -11,4 +11,5 @@ public interface EducationService {
 
     DataResult<List<Education>> getAll();
     Result add(Education education);
+    DataResult<List<Education>> findAllByCvIdOOrderByFinishDateDesc(int cvId);
 }

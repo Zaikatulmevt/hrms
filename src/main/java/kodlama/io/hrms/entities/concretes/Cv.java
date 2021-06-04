@@ -51,7 +51,6 @@ public class Cv {
     private boolean isActive;
 
 
-
     @OneToMany(mappedBy = "cv")
     private List<Education> educations;
     @OneToMany(mappedBy = "cv")

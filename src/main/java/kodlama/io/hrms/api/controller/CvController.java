@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -28,11 +29,20 @@ public class CvController {
         return this.cvService.getAll();
     }
 
+    @GetMapping("/findAllByEmployeeId")
+    public DataResult<List<Cv>> findAllByEmployeeId(@RequestParam int employeeId) {
+        return this.cvService.findAllJobSeekerId(employeeId);
+    }
+
     @PostMapping("/add")
     public ResponseEntity<?> add(@Valid @RequestBody Cv cv){
         return ResponseEntity.ok(this.cvService.add(cv));
     }
 
+    @PostMapping("/uploadPhoto")
+    public Result uploadPhoto(@RequestBody MultipartFile file, @RequestParam int cvId) {
+        return this.cvService.uploadPhoto(file, cvId);
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
