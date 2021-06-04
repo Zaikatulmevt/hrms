@@ -27,4 +27,9 @@ public class EducationManager implements EducationService {
         this.educationDao.save(education);
         return  new SuccessResult("Succesfully");
     }
+
+    @Override
+    public DataResult<List<Education>> findAllByCvIdOOrderByFinishDateDesc(int cvId) {
+        return new SuccessDataResult<List<Education>>(this.educationDao.findAllByCv_IdOrderByFinishDateDesc(cvId), "Educations Are Listed");
+    }
 }

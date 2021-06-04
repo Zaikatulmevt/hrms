@@ -22,6 +22,11 @@ public class JobExperienceController {
         return this.jobExperienceService.getAll();
     }
 
+    @GetMapping("/findAllByCvIdOrderByFinishDateDesc")
+    public DataResult<List<JobExperience>> findAllByCvIdOrderByFinishDateDesc(int cvId) {
+        return this.jobExperienceService.findAllByCvIdOrderByFinishDateDesc(cvId);
+    }
+
     @PostMapping("/add")
     public ResponseEntity<?> Add(@Valid @RequestBody JobExperience jobExperience){
         return ResponseEntity.ok(this.jobExperienceService.add(jobExperience));
